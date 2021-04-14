@@ -81,3 +81,30 @@ void List::DeleteNode(int vertex)
 	
 	
 }
+
+bool List::findNode(const int vertex)
+{
+	bool found = false;
+	Node* current = _head;
+
+	while (current && !found)
+	{
+		if (current->vertex == vertex)
+			found = true;
+
+		current = current->_next;
+	}
+
+	return found;
+}
+
+void List::printList()
+{
+	Node* temp = _head;
+
+	while (temp)
+	{
+		std::cout << temp->vertex << '(' << temp->weight << ')' << " -> ";
+		temp = temp->_next;
+	}
+}

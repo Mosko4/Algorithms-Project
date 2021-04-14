@@ -1,12 +1,13 @@
 #pragma once
-
+#include "List.h"
+#include <iostream>
 
 class AdjacencyList
 {
 private:
 
 	const int m_vertices;
-	int* m_adjList = nullptr;
+	List* m_adjList = nullptr;
 
 public:
 
@@ -18,6 +19,8 @@ public:
 	bool IsAdjacent(int u, int v);
 	void AddEdge(int u, int v, int weight);
 	void RemoveEdge(int u, int v);
-	//GetAdjList(int u);
+
+	// debugging
+	void printList();
 };
 

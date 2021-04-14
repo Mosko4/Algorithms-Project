@@ -33,17 +33,17 @@ void AdjacencyMatrix::MakeEmptyGraph(int vertices)
 
 bool AdjacencyMatrix::IsAdjacent(int u, int v)
 {
-	return m_adjMatrix[u][v] != INF;
+	return m_adjMatrix[u - 1][v - 1] != INF;
 }
 
 void AdjacencyMatrix::AddEdge(int u, int v, int weight)
 {
-	m_adjMatrix[u][v] = weight;
+	m_adjMatrix[u - 1][v - 1] = weight;
 }
 
 void AdjacencyMatrix::RemoveEdge(int u, int v)
 {
-	m_adjMatrix[u][v] = INF;
+	m_adjMatrix[u - 1][v - 1] = INF;
 }
 
 List AdjacencyMatrix::GetAdjList(int u)
@@ -52,9 +52,30 @@ List AdjacencyMatrix::GetAdjList(int u)
 
 	for (int v = 0; v < m_vertices; v++)
 	{
-		int weight = m_adjMatrix[u][v];
+		int weight = m_adjMatrix[u - 1][v - 1];
 		if (weight != INF)
 			resList.addToList(v, weight);
 	}
 	return resList;
+}
+
+void AdjacencyMatrix::printMatrix()
+{
+	for (int i = 0; i < m_vertices; i++)
+	{
+		std::cout << '\t' << i + 1;
+	}
+	std::cout << '\n' << '\n';
+	for (int i = 0; i < m_vertices; i++)
+	{
+		std::cout << i + 1 << '\t';
+		for (int j = 0; j < m_vertices; j++)
+		{
+			if (m_adjMatrix[i][j] == INF)
+				std::cout << '\\' << '\t';
+			else
+				std::cout << m_adjMatrix[i][j] << '\t';
+		}
+		std::cout << '\n';
+	}
 }

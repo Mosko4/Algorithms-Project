@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 
 class List 
 {
@@ -20,9 +20,12 @@ public:
 	List();
 	~List();
 
-	// data & update related methods
 	void MakeEmptyList();
 	void clearList();
 	void addToList(const int vertex, const int weight);
 	void DeleteNode(int vertex);
+	bool findNode(const int vertex);
+
+	// debugging
+	void printList();
 };

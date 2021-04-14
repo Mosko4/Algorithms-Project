@@ -1,6 +1,6 @@
 #pragma once
 #include <limits>
-
+#include "List.h"
 constexpr int INF = INT_MAX;
 
 class AdjacencyMatrix
@@ -20,7 +20,7 @@ public:
 	bool IsAdjacent(int u, int v);
 	void AddEdge(int u, int v, int weight);
 	void RemoveEdge(int u, int v);
-	//GetAdjList(int u);
+	List GetAdjList(int u);
 
 };
 

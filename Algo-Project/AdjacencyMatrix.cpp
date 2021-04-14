@@ -45,3 +45,16 @@ void AdjacencyMatrix::RemoveEdge(int u, int v)
 {
 	m_adjMatrix[u][v] = INF;
 }
+
+List AdjacencyMatrix::GetAdjList(int u)
+{
+	List resList;
+
+	for (int v = 0; v < m_vertices; v++)
+	{
+		int weight = m_adjMatrix[u][v];
+		if (weight != INF)
+			resList.addToList(v, weight);
+	}
+	return resList;
+}

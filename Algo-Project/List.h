@@ -3,6 +3,7 @@
 
 class List 
 {
+	friend class AdjacencyList;
 private:
 	struct Node
 	{

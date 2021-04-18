@@ -3,6 +3,8 @@
 #include <fstream>
 #include "AdjacencyList.h"
 #include "AdjacencyMatrix.h"
+#include "minArray.h"
+#include "minHeap.h"
 
 using namespace std;
 #define rcastc reinterpret_cast<char*>
@@ -99,5 +101,41 @@ void main(int argc, char** argv)
 
 	cout << "\n\n\n----------------------------\n\n\n";
 	adjList.printList();
+
+	fstream outFile;
+	outFile.open(argv[2],fstream::out);
+	if (!outFile)
+		cout << "error" << endl;
+	outFile << "Gideon ole ole" << endl;
+
+
+	minHeap heap(6);
+	minArray array(6);
+
+	heap.insert(Item(1, 6));
+	heap.insert(Item(2, 8));
+	heap.insert(Item(3, 3));
+	heap.insert(Item(4, 5));
+	heap.insert(Item(5, 7));
+	heap.insert(Item(6, 2));
+
+	cout << heap.min().key << endl;
+	heap.DecreaseKey(1, 1);
+	cout << heap.min().key << endl;
+	cout << heap.DeleteMin().key << endl;
+	cout << heap.DeleteMin().key << endl << "----------------------------------" << endl;
+
+
+	array.insert(Item(1, 6));
+	array.insert(Item(2, 8));
+	array.insert(Item(3, 3));
+	array.insert(Item(4, 5));
+	array.insert(Item(5, 7));
+	array.insert(Item(6, 2));
+	cout << array.min().key << endl;
+	array.DecreaseKey(1, 1);
+	cout << array.min().key << endl;
+	cout << array.DeleteMin().key << endl;
+	cout << array.DeleteMin().key << endl;
 	file.close();
 }

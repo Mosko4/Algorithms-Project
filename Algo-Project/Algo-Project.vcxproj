@@ -143,12 +143,15 @@
     <ClCompile Include="AdjacencyList.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="minArray.cpp" />
     <ClCompile Include="minHeap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdjacencyMatrix.h" />
     <ClInclude Include="AdjacencyList.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="minArray.h" />
     <ClInclude Include="minHeap.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>

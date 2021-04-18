@@ -42,4 +42,5 @@ void AdjacencyList::printList()
 		m_adjList[i].printList();
 		std::cout << "\n\n";
 	}
+	std::cout << "------------------------" << std::endl;
 }

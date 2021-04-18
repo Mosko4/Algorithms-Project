@@ -31,7 +31,7 @@ void AdjacencyMatrix::MakeEmptyGraph(int vertices)
 	}
 }
 
-bool AdjacencyMatrix::IsAdjacent(int u, int v)
+bool AdjacencyMatrix::IsAdjacent(int u, int v) const
 {
 	return m_adjMatrix[u - 1][v - 1] != INF;
 }
@@ -46,17 +46,22 @@ void AdjacencyMatrix::RemoveEdge(int u, int v)
 	m_adjMatrix[u - 1][v - 1] = INF;
 }
 
-List AdjacencyMatrix::GetAdjList(int u)
+void AdjacencyMatrix::GetAdjList(int u, List& list) const
 {
-	List resList;
-
 	for (int v = 0; v < m_vertices; v++)
 	{
-		int weight = m_adjMatrix[u - 1][v - 1];
+		int weight = m_adjMatrix[u - 1][v];
 		if (weight != INF)
-			resList.addToList(v, weight);
+			list.addToList(v + 1, weight);
 	}
-	return resList;
+}
+
+int AdjacencyMatrix::getWeight(int u, int v) const
+{
+	if (!IsAdjacent(u, v))
+		return -1;
+	else
+		return m_adjMatrix[u - 1][v - 1];
 }
 
 void AdjacencyMatrix::printMatrix()

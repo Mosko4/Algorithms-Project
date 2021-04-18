@@ -24,7 +24,9 @@ public:
 	void clearList();
 	void addToList(const int vertex, const int weight);
 	void DeleteNode(int vertex);
-	bool findNode(const int vertex);
+	bool findNode(const int vertex) const;
+	int getNumEdges() const { return vertices; }
+	Node* getListHead() const { return _head; }
 
 	// debugging
 	void printList();

@@ -5,6 +5,7 @@
 #include "AdjacencyMatrix.h"
 #include "minArray.h"
 #include "minHeap.h"
+#include "AlgorithmUtil.h"
 
 using namespace std;
 #define rcastc reinterpret_cast<char*>
@@ -14,9 +15,8 @@ using namespace std;
 /*
 		TODO:
 
-	1. Valid input - check for simple graph (no edge from vertex to itself, no double edges)
-	2. MinHeap 
-	3. Algorithms
+	1. Valid input - check for simple graph 
+	2. Algorithms 
 
 */
 bool checkUpdateNumber(const string& str, int& num)
@@ -60,11 +60,11 @@ void getInput(fstream& file, AdjacencyList& adjList, AdjacencyMatrix& adjMatrix)
 			invalid_input
 		}
 
-		if (vertex_i == vertex_j) // edge from vertex to itself
+		if (vertex_i == vertex_j || adjMatrix.IsAdjacent(vertex_i, vertex_j)) // edge from vertex to itself || קשת מקבילה
 		{
 			invalid_input
 		}
-
+		
 		adjList.AddEdge(vertex_i, vertex_j, weight);
 		adjMatrix.AddEdge(vertex_i, vertex_j, weight);
 	}
@@ -109,33 +109,39 @@ void main(int argc, char** argv)
 	outFile << "Gideon ole ole" << endl;
 
 
-	minHeap heap(6);
-	minArray array(6);
+	//minHeap heap(6);
+	//minArray array(6);
 
-	heap.insert(Item(1, 6));
-	heap.insert(Item(2, 8));
-	heap.insert(Item(3, 3));
-	heap.insert(Item(4, 5));
-	heap.insert(Item(5, 7));
-	heap.insert(Item(6, 2));
+	//heap.insert(Item(1, 6));
+	//heap.insert(Item(2, 8));
+	//heap.insert(Item(3, 3));
+	//heap.insert(Item(4, 5));
+	//heap.insert(Item(5, 7));
+	//heap.insert(Item(6, 2));
 
-	cout << heap.min().key << endl;
-	heap.DecreaseKey(1, 1);
-	cout << heap.min().key << endl;
-	cout << heap.DeleteMin().key << endl;
-	cout << heap.DeleteMin().key << endl << "----------------------------------" << endl;
+	//cout << heap.min().key << endl;
+	//heap.DecreaseKey(1, 1);
+	//cout << heap.min().key << endl;
+	//cout << heap.DeleteMin().key << endl;
+	//cout << heap.DeleteMin().key << endl << "----------------------------------" << endl;
 
 
-	array.insert(Item(1, 6));
-	array.insert(Item(2, 8));
-	array.insert(Item(3, 3));
-	array.insert(Item(4, 5));
-	array.insert(Item(5, 7));
-	array.insert(Item(6, 2));
-	cout << array.min().key << endl;
-	array.DecreaseKey(1, 1);
-	cout << array.min().key << endl;
-	cout << array.DeleteMin().key << endl;
-	cout << array.DeleteMin().key << endl;
+	//array.insert(Item(1, 6));
+	//array.insert(Item(2, 8));
+	//array.insert(Item(3, 3));
+	//array.insert(Item(4, 5));
+	//array.insert(Item(5, 7));
+	//array.insert(Item(6, 2));
+	//cout << array.min().key << endl;
+	//array.DecreaseKey(1, 1);
+	//cout << array.min().key << endl;
+	//cout << array.DeleteMin().key << endl;
+	//cout << array.DeleteMin().key << endl;
+	AlgorithmUtil algoUtil(source, vertices);
+	Bellman_Ford(adjMatrix, source, algoUtil);
+
+	cout << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest-1].distance;
+	
+
 	file.close();
 }

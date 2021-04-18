@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="AdjacencyMatrix.cpp" />
     <ClCompile Include="AdjacencyList.cpp" />
+    <ClCompile Include="AlgorithmUtil.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="minArray.cpp" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="AdjacencyMatrix.h" />
     <ClInclude Include="AdjacencyList.h" />
+    <ClInclude Include="AlgorithmUtil.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="minArray.h" />

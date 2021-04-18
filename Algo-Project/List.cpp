@@ -82,7 +82,7 @@ void List::DeleteNode(int vertex)
 	
 }
 
-bool List::findNode(const int vertex)
+bool List::findNode(const int vertex) const
 {
 	bool found = false;
 	Node* current = _head;

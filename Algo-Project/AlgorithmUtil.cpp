@@ -13,17 +13,21 @@ AlgorithmUtil::~AlgorithmUtil()
 
 bool AlgorithmUtil::relax(int u, int v , int weight)
 {
-	bool improved = false;
-	if (d[v - 1].Inf == true && d[u - 1].Inf == true) // u and v == INF
+	bool improved;
+	if (d[v - 1].Inf == true && d[u - 1].Inf == true) // u and v = INF
 		improved = false;
-	else if (d[u - 1].Inf == true) // u == INF
+	else if (d[u - 1].Inf == true) // u = INF
 		improved = false;
-	else if (d[v - 1].Inf == true || (d[v - 1].distance > d[u - 1].distance + weight)) // v == INF or u->v improve distance
+	else if (d[v - 1].Inf == true || (d[v - 1].distance > d[u - 1].distance + weight)) // v = INF or u->v improved distance
 	{
 		d[v - 1].distance = d[u - 1].distance + weight;
+		d[v - 1].Inf = false;
 		p[v] = u;
 		improved = true;
 	}
+	else
+		improved = false;
+
 	return improved;
 }
 

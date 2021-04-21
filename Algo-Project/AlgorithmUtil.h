@@ -10,7 +10,7 @@ class AlgorithmUtil
 public:
 	struct Route 
 	{
-		int distance;
+		float distance;
 		bool Inf;
 	};
 	Route* d;
@@ -18,7 +18,7 @@ public:
 
 	AlgorithmUtil(int s, int vertices); 
 	~AlgorithmUtil();
-	bool relax(int u, int v, int weight);
+	bool relax(int u, int v, float weight);
 	void init(int s, int vertices); // Init(vertex s)
 };
 

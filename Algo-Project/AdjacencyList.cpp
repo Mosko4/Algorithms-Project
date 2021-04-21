@@ -24,7 +24,7 @@ bool AdjacencyList::IsAdjacent(int u, int v)
 	return m_adjList[u - 1].findNode(v);
 }
 
-void AdjacencyList::AddEdge(int u, int v, int weight)
+void AdjacencyList::AddEdge(int u, int v, float weight)
 {
 	m_adjList[u - 1].addToList(v, weight);
 }

@@ -68,7 +68,7 @@ Item minArray::DeleteMin()
 	return min;
 }
 
-void minArray::DecreaseKey(int place, int newKey)
+void minArray::DecreaseKey(int place, float newKey)
 {
 	m_arr[place - 1].key = newKey;
 	if (newKey < m_min.key || m_min.key == -1) // new min or empty array

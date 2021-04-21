@@ -108,7 +108,7 @@ void minHeap::makeEmpty()
 	m_heapSize = 0;
 }
 
-void minHeap::DecreaseKey(int place, int newKey)
+void minHeap::DecreaseKey(int place, float newKey)
 {
 	int i = itemIndex[place - 1];
 	int parent = (i - 1) / 2;

@@ -31,7 +31,7 @@ void List::clearList()
 }
 
 
-void List::addToList(const int vertex, const int weight)
+void List::addToList(const int vertex, const float weight)
 {
 	Node* node = new Node(vertex, weight);
 	if (!_head) // empty list

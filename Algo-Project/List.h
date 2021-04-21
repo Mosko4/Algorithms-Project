@@ -8,10 +8,10 @@ private:
 	struct Node
 	{
 		int vertex;
-		int weight;
+		float weight;
 		Node* _next;
 
-		Node(const int v,const int w, Node* next = nullptr) : vertex(v), weight(w) ,_next(next) {}
+		Node(const int v,const float w, Node* next = nullptr) : vertex(v), weight(w) ,_next(next) {}
 	};
 
 	Node* _head, * _tail;
@@ -22,7 +22,7 @@ public:
 
 	void MakeEmptyList();
 	void clearList();
-	void addToList(const int vertex, const int weight);
+	void addToList(const int vertex, const float weight);
 	void DeleteNode(int vertex);
 	bool findNode(const int vertex) const;
 	int getNumEdges() const { return vertices; }

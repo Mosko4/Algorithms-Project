@@ -17,8 +17,10 @@ public:
 	~AdjacencyList();
 	void MakeEmptyGraph(int vertices);
 	bool IsAdjacent(int u, int v);
-	void AddEdge(int u, int v, int weight);
+	void AddEdge(int u, int v, float weight);
 	void RemoveEdge(int u, int v);
+	int getNumVertices() const { return m_vertices; }
+	List::Node* getListHead(int i) const { return m_adjList[i].getListHead();}
 
 	// debugging
 	void printList();

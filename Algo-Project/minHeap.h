@@ -30,6 +30,6 @@
 		void swap(Item& a, Item& b);
 		bool isEmpty() const;
 		void makeEmpty();
-		void DecreaseKey(int place, int newKey);
+		void DecreaseKey(int place, float newKey);
 	};
 

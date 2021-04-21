@@ -20,9 +20,9 @@ AdjacencyMatrix::~AdjacencyMatrix()
 
 void AdjacencyMatrix::MakeEmptyGraph(int vertices)
 {
-	m_adjMatrix = new int*[vertices];
+	m_adjMatrix = new float*[vertices];
 	for (int i = 0; i < vertices; i++)
-		m_adjMatrix[i] = new int[vertices];
+		m_adjMatrix[i] = new float[vertices];
 
 	for (int i = 0; i < vertices; i++)
 	{
@@ -36,7 +36,7 @@ bool AdjacencyMatrix::IsAdjacent(int u, int v) const
 	return m_adjMatrix[u - 1][v - 1] != INF;
 }
 
-void AdjacencyMatrix::AddEdge(int u, int v, int weight)
+void AdjacencyMatrix::AddEdge(int u, int v, float weight)
 {
 	m_adjMatrix[u - 1][v - 1] = weight;
 }
@@ -50,13 +50,13 @@ void AdjacencyMatrix::GetAdjList(int u, List& list) const
 {
 	for (int v = 0; v < m_vertices; v++)
 	{
-		int weight = m_adjMatrix[u - 1][v];
+		float weight = m_adjMatrix[u - 1][v];
 		if (weight != INF)
 			list.addToList(v + 1, weight);
 	}
 }
 
-int AdjacencyMatrix::getWeight(int u, int v) const
+float AdjacencyMatrix::getWeight(int u, int v) const
 {
 	if (!IsAdjacent(u, v))
 		return -1;

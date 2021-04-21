@@ -1,4 +1,5 @@
 #include "AlgorithmUtil.h"
+#include "List.h"
 
 AlgorithmUtil::AlgorithmUtil(int s, int vertices) : d(new Route[vertices]) , p(new int[vertices+1]())
 {
@@ -11,7 +12,7 @@ AlgorithmUtil::~AlgorithmUtil()
 	delete[] d;
 }
 
-bool AlgorithmUtil::relax(int u, int v , int weight)
+bool AlgorithmUtil::relax(int u, int v , float weight)
 {
 	bool improved;
 	if (d[v - 1].Inf == true && d[u - 1].Inf == true) // u and v = INF
@@ -43,29 +44,60 @@ void AlgorithmUtil::init(int s, int vertices)
 
 bool Bellman_Ford(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil)
 {
-	algoUtil.init(vertex, graph.getNumVertices());
+	int NumVertices = graph.getNumVertices();
 
-	for (int i = 1; i < graph.getNumVertices(); i++) // main loop
+	algoUtil.init(vertex, NumVertices);
+	for (int j = 0; j < NumVertices - 1; j++)// main loop
 	{
-		List edges;
-		graph.GetAdjList(i, edges);
-		auto temp = edges.getListHead();
-		
-		while (temp) // relax edges from vertex i
+		for (int i = 1; i < NumVertices; i++)
 		{
-			algoUtil.relax(i, temp->vertex, temp->weight);
-			temp = temp->_next;
+			List edges;
+			graph.GetAdjList(i, edges);
+			auto temp = edges.getListHead();
+			while (temp) // relax edges from vertex i
+			{
+				algoUtil.relax(i, temp->vertex, temp->weight);
+				temp = temp->_next;
+			}
 		}
 	}
-
-	for (int i = 1; i < graph.getNumVertices(); i++)
+	for (int i = 1; i < NumVertices; i++)
 	{
-		for (int j = 1; j < graph.getNumVertices(); j++)
+		for (int j = 1; j < NumVertices; j++)
 		{
 			if (graph.IsAdjacent(i, j) && algoUtil.relax(i, j, graph.getWeight(i, j)))
 				return false; // negative cycle
 		}
 	}
 
+	return true; // success
+}
+
+bool Bellman_Ford(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil)
+{
+	int NumVertices = graph.getNumVertices();
+	algoUtil.init(vertex, NumVertices);
+	for (int j = 0; j < NumVertices-1; j++)// main loop
+	{
+		for (int i = 1; i < NumVertices; i++) 
+		{
+			auto temp = graph.getListHead(i - 1);
+			while (temp)
+			{
+				algoUtil.relax(i, temp->vertex, temp->weight);
+				temp = temp->_next;
+			}
+		}
+	}
+	for (int i = 1; i < NumVertices; i++) 
+	{
+		auto temp = graph.getListHead(i - 1);
+		while (temp)
+		{
+			if (algoUtil.relax(i, temp->vertex, temp->weight))
+				return false; // Negative cycle
+			temp = temp->_next;
+		}
+	}
 	return true; // success
 }

@@ -19,7 +19,7 @@ public:
 	void makeEmpty();
 	void insert(const Item& item);
 	Item DeleteMin();
-	void DecreaseKey(int place, int newKey);
+	void DecreaseKey(int place, float newKey);
 	Item min() const { return m_min; }
 	bool isEmpty() const { return m_heapSize == 0; }
 

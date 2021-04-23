@@ -46,15 +46,28 @@ void main(int argc, char** argv)
 	}
 
 	AlgorithmUtil algoUtil(source, vertices);
-	Bellman_Ford(adjMatrix, source, algoUtil);
 
+	Dijkstra_Array(adjMatrix, source, algoUtil);
+	cout << "Dijkstra Array Matrix: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
+	Dijkstra_Array(adjList, source, algoUtil);
+	cout << "Dijkstra Array List: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
+
+
+	Dijkstra_Heap(adjList, source, algoUtil);
 	if (algoUtil.d[dest - 1].Inf)
 	{
+		cout << "No route from " << source << " to " << dest << endl;
 		invalid_input;
 	}
+	cout << "Dijkstra Heap List: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
+	Dijkstra_Heap(adjMatrix, source, algoUtil);
+	cout << "Dijkstra Heap Matrix: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
+
+	Bellman_Ford(adjMatrix, source, algoUtil);
+
+	
 
 	cout << "Bellman Ford Matrix: " <<"Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
-	
 	Bellman_Ford(adjList, source, algoUtil);
 	cout << "Bellman Ford List: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
 

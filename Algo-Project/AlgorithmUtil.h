@@ -1,10 +1,13 @@
 #pragma once
-#include "AdjacencyMatrix.h"
-#include "AdjacencyList.h"
+#define _CRT_SECURE_NO_WARNINGS
+#define invalid_input cout << "Invalid input" << endl; exit(1);
+#include "minHeap.h"
+#include "minArray.h"
 #include <fstream>
 #include <string>
+
 using namespace std;
-#define invalid_input cout << "Invalid input" << endl; exit(1);
+constexpr int MAX_SIZE = 201;
 
 
 /*	This class holds the distance array and parents array, initialized from source vertex s.
@@ -30,6 +33,12 @@ public:
 // Algorithms for implementation in the project
 bool Bellman_Ford(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil);
 bool Bellman_Ford(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil);
+
+void Dijkstra_Heap(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil);
+void Dijkstra_Heap(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil);
+
+void Dijkstra_Array(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil);
+void Dijkstra_Array(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil);
 
 
 // Methods to get input from file and check if it's valid

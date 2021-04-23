@@ -7,7 +7,7 @@ class minArray
 private :
 	Item* m_arr;
 	int m_maxSize, m_heapSize;
-	Item m_min;
+	Item* m_min;
 public:
 
 	minArray(int maxSize);
@@ -20,8 +20,8 @@ public:
 	void insert(const Item& item);
 	Item DeleteMin();
 	void DecreaseKey(int place, float newKey);
-	Item min() const { return m_min; }
+	Item min() const { return *m_min; }
 	bool isEmpty() const { return m_heapSize == 0; }
-
+	void build(int vertex);
 };
 

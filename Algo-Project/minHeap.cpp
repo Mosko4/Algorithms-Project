@@ -46,6 +46,7 @@ Item minHeap::DeleteMin()
 	Item min = m_arr[0];
 	m_heapSize--;
 	m_arr[0] = m_arr[m_heapSize];
+	itemIndex[m_arr[0].data - 1] = 0;
 	fixHeap(0);
 
 	return min;
@@ -121,6 +122,19 @@ void minHeap::DecreaseKey(int place, float newKey)
 		parent = (i - 1) / 2;
 	}
 
+}
+
+void minHeap::Build(int vertex)
+{
+	
+	for (int i = 0; i < m_maxSize; i++)
+	{
+		Item currentItem(i + 1, FLT_MAX);
+		if (i + 1 == vertex) // source vertex
+			currentItem.key = 0;
+
+		insert(currentItem);
+	}
 }
 
 

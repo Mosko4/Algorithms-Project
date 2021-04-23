@@ -44,10 +44,11 @@ void AlgorithmUtil::init(int s, int vertices)
 
 bool Bellman_Ford(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil)
 {
+	// init
 	int NumVertices = graph.getNumVertices();
-
 	algoUtil.init(vertex, NumVertices);
-	for (int j = 0; j < NumVertices - 1; j++)// main loop
+
+	for (int j = 0; j < NumVertices - 1; j++) // main loop
 	{
 		for (int i = 1; i < NumVertices; i++)
 		{
@@ -61,6 +62,7 @@ bool Bellman_Ford(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoU
 			}
 		}
 	}
+
 	for (int i = 1; i < NumVertices; i++)
 	{
 		for (int j = 1; j < NumVertices; j++)
@@ -75,9 +77,11 @@ bool Bellman_Ford(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoU
 
 bool Bellman_Ford(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil)
 {
+	// init
 	int NumVertices = graph.getNumVertices();
 	algoUtil.init(vertex, NumVertices);
-	for (int j = 0; j < NumVertices-1; j++)// main loop
+
+	for (int j = 0; j < NumVertices - 1; j++) // main loop
 	{
 		for (int i = 1; i < NumVertices; i++) 
 		{
@@ -89,6 +93,7 @@ bool Bellman_Ford(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUti
 			}
 		}
 	}
+
 	for (int i = 1; i < NumVertices; i++) 
 	{
 		auto temp = graph.getListHead(i - 1);
@@ -100,6 +105,114 @@ bool Bellman_Ford(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUti
 		}
 	}
 	return true; // success
+}
+
+void Dijkstra_Heap(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil)
+{
+	// init
+	int NumVertices = graph.getNumVertices();
+	algoUtil.init(vertex, NumVertices);
+	minHeap queue(NumVertices);
+	queue.Build(vertex); // source vertex's key = 0, other vertices' keys = limit
+
+	// search
+	while(!queue.isEmpty()) 
+	{
+		Item u = queue.DeleteMin();
+		List u_edges;
+		graph.GetAdjList(u.data, u_edges); 
+		auto temp = u_edges.getListHead();
+
+		while (temp)
+		{
+			int v = temp->vertex;
+			if (algoUtil.relax(u.data, v, temp->weight)) 
+			{
+				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // decrease (v, d[v])
+			}
+			temp = temp->_next;
+		}
+	}
+}
+
+void Dijkstra_Heap(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil)
+{
+	// init
+	int NumVertices = graph.getNumVertices();
+	algoUtil.init(vertex, NumVertices);
+	minHeap queue(NumVertices);
+	queue.Build(vertex); // source vertex's key = 0, other vertices' keys = limit
+
+	// search
+	while (!queue.isEmpty())
+	{
+		Item u = queue.DeleteMin();
+		auto u_edges = graph.getListHead(u.data - 1);
+
+		while (u_edges)
+		{
+			int v = u_edges->vertex;
+			if (algoUtil.relax(u.data, v, u_edges->weight))
+			{
+				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // decrease (v, d[v])
+			}
+			u_edges = u_edges->_next;
+		}
+	}
+}
+
+void Dijkstra_Array(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil)
+{
+	// init
+	int NumVertices = graph.getNumVertices();
+	algoUtil.init(vertex, NumVertices);
+	minArray queue(NumVertices);
+	queue.build(vertex);
+
+	// search
+	while (!queue.isEmpty())
+	{
+		Item u = queue.DeleteMin();
+		List u_edges;
+		graph.GetAdjList(u.data, u_edges);
+		auto temp = u_edges.getListHead();
+
+		while (temp)
+		{
+			int v = temp->vertex;
+			if (algoUtil.relax(u.data, v, temp->weight))
+			{
+				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // decrease (v, d[v])
+			}
+			temp = temp->_next;
+		}
+	}
+}
+
+void Dijkstra_Array(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil)
+{
+	// init
+	int NumVertices = graph.getNumVertices();
+	algoUtil.init(vertex, NumVertices);
+	minArray queue(NumVertices);
+	queue.build(vertex); 
+
+	// search
+	while (!queue.isEmpty())
+	{
+		Item u = queue.DeleteMin();
+		auto u_edges = graph.getListHead(u.data - 1);
+
+		while (u_edges)
+		{
+			int v = u_edges->vertex;
+			if (algoUtil.relax(u.data, v, u_edges->weight))
+			{
+				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // decrease (v, d[v])
+			}
+			u_edges = u_edges->_next;
+		}
+	}
 }
 
 
@@ -133,10 +246,17 @@ bool getWeightFile(string& str, float& weight)
 {
 	bool validInput = true, firstDecimalPoint = false;
 	string numStr;
-	int indexBegin = 0, indexEnd;
-	if (str.find_first_of(' ') != string::npos) // more than a single number
-		validInput = false;
-	else
+	int index = str.find_first_of(' ');
+	if (index != string::npos) // if there's a space after the weight number we make sure the rest of the line is only whitespace
+	{
+		for (int i = index; i < str.length() && validInput; i++)
+		{
+			if (!isspace(str[i]))
+				validInput = false;
+		}
+	}
+
+	if (validInput)
 	{
 		for (auto& itr : str)
 		{
@@ -157,38 +277,57 @@ bool getWeightFile(string& str, float& weight)
 		weight = stof(str, nullptr);
 	}
 
+
 	return validInput;
 }
 
 void getEdges(fstream& file, AdjacencyList& adjList, AdjacencyMatrix& adjMatrix)
 {
 	string currentRead;
-	int vertices = adjMatrix.getNumVertices(), source, dest, vertex_i, vertex_j;
+	int vertices = adjMatrix.getNumVertices(), vertex_i, vertex_j;
 	float weight;
 	bool valid1, valid2, valid3;
 
 
 
 
-	// get edges and their weight
+	/* read from file to get edges and their weight
+	   assuming format: number-space-number-space-number as a valid input
+	                       ^           ^            ^
+	                       |           |            |
+	                    vertex_i    vertex_j      weight
+	*/
 	while (!file.eof())
 	{
 		getline(file, currentRead);
-		valid1 = getVertexFile(currentRead, vertex_i);
-		valid2 = getVertexFile(currentRead, vertex_j);
-		valid3 = getWeightFile(currentRead, weight);
+		if (currentRead == "") // assuming blank lines = end of file
+			break;
 
-		if (!valid1 || !valid2 || !valid3 ||
+		/*valid1 = getVertexFile(currentRead, vertex_i);
+		valid2 = getVertexFile(currentRead, vertex_j);
+		valid3 = getWeightFile(currentRead, weight);*/
+		char buffer[MAX_SIZE];
+		buffer[0] = '\0';
+
+		// we use sscanf to parse the line from file into the variables. if a non-empty string is read after the weight
+		// or no. of variables parsed is not 3, there is a non-valid input.
+		int n = sscanf(currentRead.c_str(), "%d %d %f%s", &vertex_i, &vertex_j, &weight, buffer);
+		if (n != 3 || string(buffer) != "" || vertex_i == vertex_j || vertex_i > vertices
+			|| vertex_j > vertices || adjMatrix.IsAdjacent(vertex_i, vertex_j))
+		{
+			invalid_input
+
+		}
+
+		/*if (!valid1 || !valid2 || !valid3 ||
 			vertex_i == vertex_j || vertex_i > vertices
 			|| vertex_j > vertices || adjMatrix.IsAdjacent(vertex_i, vertex_j))
 		{
 			invalid_input
-		}
-
+		}*/
 
 		adjList.AddEdge(vertex_i, vertex_j, weight);
 		adjMatrix.AddEdge(vertex_i, vertex_j, weight);
-
 	}
 }
 

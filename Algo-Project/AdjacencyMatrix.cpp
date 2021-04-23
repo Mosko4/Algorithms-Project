@@ -64,6 +64,15 @@ float AdjacencyMatrix::getWeight(int u, int v) const
 		return m_adjMatrix[u - 1][v - 1];
 }
 
+Item* AdjacencyMatrix::BuildItemArray()
+{
+	Item* res = new Item[m_vertices];
+
+
+
+	return res;
+}
+
 void AdjacencyMatrix::printMatrix()
 {
 	for (int i = 0; i < m_vertices; i++)

@@ -19,7 +19,7 @@ void AdjacencyList::MakeEmptyGraph(int vertices)
 	m_adjList = new List[vertices];
 }
 
-bool AdjacencyList::IsAdjacent(int u, int v)
+bool AdjacencyList::IsAdjacent(int u, int v) const
 {
 	return m_adjList[u - 1].findNode(v);
 }

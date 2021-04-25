@@ -144,6 +144,7 @@
     <ClCompile Include="AlgorithmUtil.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeasureTime.cpp" />
     <ClCompile Include="minArray.cpp" />
     <ClCompile Include="minHeap.cpp" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="AlgorithmUtil.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="MeasureTime.h" />
     <ClInclude Include="minArray.h" />
     <ClInclude Include="minHeap.h" />
   </ItemGroup>

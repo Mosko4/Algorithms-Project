@@ -1,21 +1,19 @@
 #include <iostream>
 #include "AdjacencyList.h"
 #include "AdjacencyMatrix.h"
-#include "minArray.h"
-#include "minHeap.h"
 #include "AlgorithmUtil.h"
+#include "MeasureTime.h"
 
 /*
-		TODO:
+	Algorithms - Project by Omer Moskowitz & Yarden Yaakov Naim
+	============================================================
 
-	1. Valid input - check for simple graph 
-	2. Algorithms 
-	3. BFS ???
-	4. add operator= delete
-
+	The program receives two file names via command line arguments.
+	The first file in argv[1] is an input file represnting a graph.
+	The program builds two graphs (adjacency list, adjacency matrix) from the input file.
+	After the graphs are complete, it uses the algorithms: Dijkstra & Bellman Ford, measures their operation time and prints the results to output file in argv[2],
+	and also prints the result (total weight) from source vertex to destination vertex to the terminal window.
 */
-
-
 
 void main(int argc, char** argv)
 {
@@ -27,50 +25,13 @@ void main(int argc, char** argv)
 	}
 
 	int vertices, source, dest;
+	// Get input from file and build graphs
 	getVertices(file, vertices, source, dest);
-
 	AdjacencyList adjList(vertices);
 	AdjacencyMatrix adjMatrix(vertices);
 	getEdges(file, adjList, adjMatrix);
-
-
-	adjMatrix.printMatrix();
-	cout << "\n\n\n----------------------------\n\n\n";
-	adjList.printList();
-
-	fstream outFile;
-	outFile.open(argv[2], fstream::out);
-	if (!outFile)
-	{
-		invalid_input
-	}
-
-	AlgorithmUtil algoUtil(source, vertices);
-
-	Dijkstra_Array(adjMatrix, source, algoUtil);
-	cout << "Dijkstra Array Matrix: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
-	Dijkstra_Array(adjList, source, algoUtil);
-	cout << "Dijkstra Array List: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
-
-
-	Dijkstra_Heap(adjList, source, algoUtil);
-	if (algoUtil.d[dest - 1].Inf)
-	{
-		cout << "No route from " << source << " to " << dest << endl;
-		invalid_input;
-	}
-	cout << "Dijkstra Heap List: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
-	Dijkstra_Heap(adjMatrix, source, algoUtil);
-	cout << "Dijkstra Heap Matrix: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
-
-	Bellman_Ford(adjMatrix, source, algoUtil);
-
-	
-
-	cout << "Bellman Ford Matrix: " <<"Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
-	Bellman_Ford(adjList, source, algoUtil);
-	cout << "Bellman Ford List: " << "Weight from " << source << " to " << dest << " is " << algoUtil.d[dest - 1].distance << endl;
-
-	
 	file.close();
+
+	// Activate algorithms and measure their complexity
+	measureComplexity(vertices, source, dest, adjList, adjMatrix, argv[2]);
 }

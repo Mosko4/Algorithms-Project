@@ -2,6 +2,8 @@
 #include "List.h"
 #include <iostream>
 
+// This class defines a directed weighted graph using an adjacency list with an array of 'List' (self-implemented linked list class)
+
 class AdjacencyList
 {
 private:
@@ -11,12 +13,13 @@ private:
 
 public:
 
-	AdjacencyList() = delete;
-	AdjacencyList(const AdjacencyList& other) = delete;
+	AdjacencyList(const AdjacencyList& other) = delete; // no use for a copy ctor
 	AdjacencyList(int vertices);
 	~AdjacencyList();
+	AdjacencyList& operator=(AdjacencyList& other) = delete; // no use for this operator
+
 	void MakeEmptyGraph(int vertices);
-	bool IsAdjacent(int u, int v);
+	bool IsAdjacent(int u, int v) const;
 	void AddEdge(int u, int v, float weight);
 	void RemoveEdge(int u, int v);
 	int getNumVertices() const { return m_vertices; }

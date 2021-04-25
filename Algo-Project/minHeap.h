@@ -18,7 +18,6 @@
 		minHeap(Item* arr, int size); // creates the heap using floyd alogrithm
 		minHeap(minHeap& other) = delete; // no use for a copy ctor
 		~minHeap();
-
 		minHeap& operator=(minHeap& other) = delete; // no use for this operator
 
 		void insert(const Item& item);

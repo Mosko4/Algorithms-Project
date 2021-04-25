@@ -3,7 +3,10 @@
 #include "List.h"
 #include "Item.h"
 #include <iostream>
-constexpr int INF = -1;
+
+constexpr int INF = -1; // for non-adjacanet vertices
+
+// This class defines a directed weighted graph using an adjacency matrix 
 
 class AdjacencyMatrix
 {
@@ -15,9 +18,10 @@ private:
 public:
 
 	AdjacencyMatrix() = delete;
-	AdjacencyMatrix(const AdjacencyMatrix& other) = delete;
+	AdjacencyMatrix(const AdjacencyMatrix& other) = delete; // no use for a copy ctor
 	AdjacencyMatrix(int vertices);
 	~AdjacencyMatrix();
+	AdjacencyMatrix& operator=(AdjacencyMatrix& other) = delete; // no use for this operator
 
 	void MakeEmptyGraph(int vertices);
 	bool IsAdjacent(int u, int v) const;
@@ -29,6 +33,5 @@ public:
 	Item* BuildItemArray();
 	// debugging
 	void printMatrix();
-
 };
 

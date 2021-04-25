@@ -36,6 +36,9 @@
     <ClCompile Include="AlgorithmUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MeasureTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdjacencyMatrix.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AlgorithmUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeasureTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

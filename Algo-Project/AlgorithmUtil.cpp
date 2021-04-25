@@ -19,7 +19,7 @@ bool AlgorithmUtil::relax(int u, int v , float weight)
 		improved = false;
 	else if (d[u - 1].Inf == true) // u = INF
 		improved = false;
-	else if (d[v - 1].Inf == true || (d[v - 1].distance > d[u - 1].distance + weight)) // v = INF or u->v improved distance
+	else if (d[v - 1].Inf == true || (d[v - 1].distance > d[u - 1].distance + weight)) // v = INF or u -> v improved distance
 	{
 		d[v - 1].distance = d[u - 1].distance + weight;
 		d[v - 1].Inf = false;
@@ -42,20 +42,25 @@ void AlgorithmUtil::init(int s, int vertices)
 	d[s - 1].Inf = false;
 }
 
+float AlgorithmUtil::getWeight(int destination)
+{
+	return d[destination - 1].distance;
+}
+
 bool Bellman_Ford(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil)
 {
-	// init
+	// Init
 	int NumVertices = graph.getNumVertices();
 	algoUtil.init(vertex, NumVertices);
 
-	for (int j = 0; j < NumVertices - 1; j++) // main loop
+	for (int j = 0; j < NumVertices - 1; j++) // Main loop
 	{
-		for (int i = 1; i < NumVertices; i++)
+		for (int i = 1; i <= NumVertices; i++)
 		{
 			List edges;
 			graph.GetAdjList(i, edges);
 			auto temp = edges.getListHead();
-			while (temp) // relax edges from vertex i
+			while (temp) // Relax edges from vertex i
 			{
 				algoUtil.relax(i, temp->vertex, temp->weight);
 				temp = temp->_next;
@@ -68,22 +73,22 @@ bool Bellman_Ford(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoU
 		for (int j = 1; j < NumVertices; j++)
 		{
 			if (graph.IsAdjacent(i, j) && algoUtil.relax(i, j, graph.getWeight(i, j)))
-				return false; // negative cycle
+				return false; // Negative cycle
 		}
 	}
 
-	return true; // success
+	return true; // Success
 }
 
 bool Bellman_Ford(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil)
 {
-	// init
+	// Init
 	int NumVertices = graph.getNumVertices();
 	algoUtil.init(vertex, NumVertices);
 
-	for (int j = 0; j < NumVertices - 1; j++) // main loop
+	for (int j = 0; j < NumVertices - 1; j++) // Main loop
 	{
-		for (int i = 1; i < NumVertices; i++) 
+		for (int i = 1; i <= NumVertices; i++) 
 		{
 			auto temp = graph.getListHead(i - 1);
 			while (temp)
@@ -104,7 +109,7 @@ bool Bellman_Ford(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUti
 			temp = temp->_next;
 		}
 	}
-	return true; // success
+	return true; // Success
 }
 
 void Dijkstra_Heap(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil)
@@ -113,9 +118,9 @@ void Dijkstra_Heap(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algo
 	int NumVertices = graph.getNumVertices();
 	algoUtil.init(vertex, NumVertices);
 	minHeap queue(NumVertices);
-	queue.Build(vertex); // source vertex's key = 0, other vertices' keys = limit
+	queue.Build(vertex); // Source vertex's key = 0, other vertices' keys = limit
 
-	// search
+	// Search
 	while(!queue.isEmpty()) 
 	{
 		Item u = queue.DeleteMin();
@@ -128,7 +133,7 @@ void Dijkstra_Heap(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algo
 			int v = temp->vertex;
 			if (algoUtil.relax(u.data, v, temp->weight)) 
 			{
-				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // decrease (v, d[v])
+				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // Decrease (v, d[v])
 			}
 			temp = temp->_next;
 		}
@@ -137,13 +142,13 @@ void Dijkstra_Heap(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algo
 
 void Dijkstra_Heap(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil)
 {
-	// init
+	// Init
 	int NumVertices = graph.getNumVertices();
 	algoUtil.init(vertex, NumVertices);
 	minHeap queue(NumVertices);
 	queue.Build(vertex); // source vertex's key = 0, other vertices' keys = limit
 
-	// search
+	// Search
 	while (!queue.isEmpty())
 	{
 		Item u = queue.DeleteMin();
@@ -154,7 +159,7 @@ void Dijkstra_Heap(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUt
 			int v = u_edges->vertex;
 			if (algoUtil.relax(u.data, v, u_edges->weight))
 			{
-				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // decrease (v, d[v])
+				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // Decrease (v, d[v])
 			}
 			u_edges = u_edges->_next;
 		}
@@ -163,13 +168,13 @@ void Dijkstra_Heap(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUt
 
 void Dijkstra_Array(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& algoUtil)
 {
-	// init
+	// Init
 	int NumVertices = graph.getNumVertices();
 	algoUtil.init(vertex, NumVertices);
 	minArray queue(NumVertices);
 	queue.build(vertex);
 
-	// search
+	// Search
 	while (!queue.isEmpty())
 	{
 		Item u = queue.DeleteMin();
@@ -182,7 +187,7 @@ void Dijkstra_Array(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& alg
 			int v = temp->vertex;
 			if (algoUtil.relax(u.data, v, temp->weight))
 			{
-				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // decrease (v, d[v])
+				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // Decrease (v, d[v])
 			}
 			temp = temp->_next;
 		}
@@ -191,13 +196,13 @@ void Dijkstra_Array(const AdjacencyMatrix& graph, int vertex, AlgorithmUtil& alg
 
 void Dijkstra_Array(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoUtil)
 {
-	// init
+	// Init
 	int NumVertices = graph.getNumVertices();
 	algoUtil.init(vertex, NumVertices);
 	minArray queue(NumVertices);
 	queue.build(vertex); 
 
-	// search
+	// Search
 	while (!queue.isEmpty())
 	{
 		Item u = queue.DeleteMin();
@@ -208,77 +213,27 @@ void Dijkstra_Array(const AdjacencyList& graph, int vertex, AlgorithmUtil& algoU
 			int v = u_edges->vertex;
 			if (algoUtil.relax(u.data, v, u_edges->weight))
 			{
-				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // decrease (v, d[v])
+				queue.DecreaseKey(v, algoUtil.d[v - 1].distance); // Decrease (v, d[v])
 			}
 			u_edges = u_edges->_next;
 		}
 	}
 }
 
-
-bool getVertexFile(string& str, int& vertex)
+void getVertices(fstream& file, int& vertices, int& source, int& dest)
 {
-	bool validInput = true;
-	string numStr;
-	int indexBegin = 0, indexEnd;
-	indexEnd = str.find_first_of(' ', indexBegin);
-
-	for (int i = indexBegin; i < indexEnd; i++)
+	string currentRead;
+	// Get no. of vertices, source and destination vertex
+	getline(file, currentRead);
+	vertices = checkLine(currentRead);
+	getline(file, currentRead);
+	source = checkLine(currentRead);
+	getline(file, currentRead);
+	dest = checkLine(currentRead);
+	if (source > vertices || vertices < 1 || source < 1 || dest < 1 || dest > vertices) // Valid vertex number
 	{
-		if (str[i] > '9' || str[i] < '0')
-		{
-			validInput = false;
-			break;
-		}
-		else
-		{
-			numStr.push_back(str[i]);
-		}
+		invalid_input
 	}
-
-	str = string(str.c_str() + indexEnd + 1); // string str = string(char *str + indexBegin)
-	vertex = atoi(numStr.c_str());
-	return validInput;
-
-}
-
-bool getWeightFile(string& str, float& weight)
-{
-	bool validInput = true, firstDecimalPoint = false;
-	string numStr;
-	int index = str.find_first_of(' ');
-	if (index != string::npos) // if there's a space after the weight number we make sure the rest of the line is only whitespace
-	{
-		for (int i = index; i < str.length() && validInput; i++)
-		{
-			if (!isspace(str[i]))
-				validInput = false;
-		}
-	}
-
-	if (validInput)
-	{
-		for (auto& itr : str)
-		{
-			if (itr == '.')
-			{
-				if (firstDecimalPoint)
-					validInput = false;
-				else
-					firstDecimalPoint = true;
-			}
-			else if (itr > '9' || itr < '0')
-				validInput = false;
-
-			if (!validInput)
-				break;
-		}
-
-		weight = stof(str, nullptr);
-	}
-
-
-	return validInput;
 }
 
 void getEdges(fstream& file, AdjacencyList& adjList, AdjacencyMatrix& adjMatrix)
@@ -287,12 +242,8 @@ void getEdges(fstream& file, AdjacencyList& adjList, AdjacencyMatrix& adjMatrix)
 	int vertices = adjMatrix.getNumVertices(), vertex_i, vertex_j;
 	float weight;
 	bool valid1, valid2, valid3;
-
-
-
-
-	/* read from file to get edges and their weight
-	   assuming format: number-space-number-space-number as a valid input
+	/* Read from file to get edges and their weight.
+	   Assuming format: number-space-number-space-number as a valid input. We allow whitespace characters after the weight because sscanf will ignore them.
 	                       ^           ^            ^
 	                       |           |            |
 	                    vertex_i    vertex_j      weight
@@ -300,32 +251,18 @@ void getEdges(fstream& file, AdjacencyList& adjList, AdjacencyMatrix& adjMatrix)
 	while (!file.eof())
 	{
 		getline(file, currentRead);
-		if (currentRead == "") // assuming blank lines = end of file
+		if (currentRead == "") // Assuming blank line -> end of file
 			break;
-
-		/*valid1 = getVertexFile(currentRead, vertex_i);
-		valid2 = getVertexFile(currentRead, vertex_j);
-		valid3 = getWeightFile(currentRead, weight);*/
 		char buffer[MAX_SIZE];
 		buffer[0] = '\0';
-
 		// we use sscanf to parse the line from file into the variables. if a non-empty string is read after the weight
 		// or no. of variables parsed is not 3, there is a non-valid input.
 		int n = sscanf(currentRead.c_str(), "%d %d %f%s", &vertex_i, &vertex_j, &weight, buffer);
 		if (n != 3 || string(buffer) != "" || vertex_i == vertex_j || vertex_i > vertices
-			|| vertex_j > vertices || adjMatrix.IsAdjacent(vertex_i, vertex_j))
+			|| vertex_j > vertices || adjMatrix.IsAdjacent(vertex_i, vertex_j ) || weight < 0) // checks for non-valid cases (i.e negative weight, duplicate edge, non-existing vertex, etc)
 		{
 			invalid_input
-
 		}
-
-		/*if (!valid1 || !valid2 || !valid3 ||
-			vertex_i == vertex_j || vertex_i > vertices
-			|| vertex_j > vertices || adjMatrix.IsAdjacent(vertex_i, vertex_j))
-		{
-			invalid_input
-		}*/
-
 		adjList.AddEdge(vertex_i, vertex_j, weight);
 		adjMatrix.AddEdge(vertex_i, vertex_j, weight);
 	}
@@ -346,21 +283,4 @@ int checkLine(string& currentRead)
 	}
 
 	return stoi(numberStr, nullptr, 10);
-}
-
-void getVertices(fstream& file, int& vertices, int& source, int& dest)
-{
-	string currentRead;
-
-	// get no. of vertices, source and destination vertex
-	getline(file, currentRead);
-	vertices = checkLine(currentRead);
-	getline(file, currentRead);
-	source = checkLine(currentRead);
-	getline(file, currentRead);
-	dest = checkLine(currentRead);
-	if (source > vertices || vertices < 1 || source < 1 || dest < 1 || dest > vertices)
-	{
-		invalid_input
-	}
 }

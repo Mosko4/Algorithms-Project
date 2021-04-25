@@ -13,7 +13,6 @@ public:
 	minArray(int maxSize);
 	minArray(minArray& other) = delete; // no use for a copy ctor
 	~minArray();
-
 	minArray& operator=(minArray& other) = delete; // no use for this operator
 
 	void makeEmpty();

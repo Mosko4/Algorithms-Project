@@ -1,7 +1,7 @@
 #include "MeasureTime.h"
 
 
-void measureComplexity(int vertices, int source, int dest, const AdjacencyList& adjList, const AdjacencyMatrix& adjMatrix, const char* fileName)
+void MeasureTime::measureComplexity(int vertices, int source, int dest, const AdjacencyList& adjList, const AdjacencyMatrix& adjMatrix, const char* fileName)
 {
 	AlgorithmUtil algoUtil(source, vertices);
 
@@ -20,7 +20,7 @@ void measureComplexity(int vertices, int source, int dest, const AdjacencyList& 
 	cout << "Matrix Bellman Ford " << algoUtil.getWeight(dest) << endl;
 }
 
-void measureDijkstra_Heap(const char* fileName, const AdjacencyList& adjList, int source, AlgorithmUtil& algoUtil, int dest)
+void MeasureTime::measureDijkstra_Heap(const char* fileName, const AdjacencyList& adjList, int source, AlgorithmUtil& algoUtil, int dest)
 {
 	auto start = chrono::high_resolution_clock::now();
 
@@ -51,7 +51,7 @@ void measureDijkstra_Heap(const char* fileName, const AdjacencyList& adjList, in
 	myfile.close();
 }
 
-void measureDijkstra_Array(const char* fileName, const AdjacencyList& adjList, int source, AlgorithmUtil& algoUtil)
+void MeasureTime::measureDijkstra_Array(const char* fileName, const AdjacencyList& adjList, int source, AlgorithmUtil& algoUtil)
 {
 	auto start = chrono::high_resolution_clock::now();
 
@@ -76,7 +76,7 @@ void measureDijkstra_Array(const char* fileName, const AdjacencyList& adjList, i
 	myfile.close();
 }
 
-void measureBellmanFord(const char* fileName, const AdjacencyList& adjList, int source, AlgorithmUtil& algoUtil)
+void MeasureTime::measureBellmanFord(const char* fileName, const AdjacencyList& adjList, int source, AlgorithmUtil& algoUtil)
 {
 	auto start = chrono::high_resolution_clock::now();
 
@@ -101,7 +101,7 @@ void measureBellmanFord(const char* fileName, const AdjacencyList& adjList, int 
 	myfile.close();
 }
 
-void measureDijkstra_Heap(const char* fileName, const AdjacencyMatrix& adjMatrix, int source, AlgorithmUtil& algoUtil)
+void MeasureTime::measureDijkstra_Heap(const char* fileName, const AdjacencyMatrix& adjMatrix, int source, AlgorithmUtil& algoUtil)
 {
 	auto start = chrono::high_resolution_clock::now();
 
@@ -126,7 +126,7 @@ void measureDijkstra_Heap(const char* fileName, const AdjacencyMatrix& adjMatrix
 	myfile.close();
 }
 
-void measureDijkstra_Array(const char* fileName, const AdjacencyMatrix& adjMatrix, int source, AlgorithmUtil& algoUtil)
+void MeasureTime::measureDijkstra_Array(const char* fileName, const AdjacencyMatrix& adjMatrix, int source, AlgorithmUtil& algoUtil)
 {
 	auto start = chrono::high_resolution_clock::now();
 
@@ -151,7 +151,7 @@ void measureDijkstra_Array(const char* fileName, const AdjacencyMatrix& adjMatri
 	myfile.close();
 }
 
-void measureBellmanFord(const char* fileName, const AdjacencyMatrix& adjMatrix, int source, AlgorithmUtil& algoUtil)
+void MeasureTime::measureBellmanFord(const char* fileName, const AdjacencyMatrix& adjMatrix, int source, AlgorithmUtil& algoUtil)
 {
 	auto start = chrono::high_resolution_clock::now();
 

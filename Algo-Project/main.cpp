@@ -33,5 +33,5 @@ void main(int argc, char** argv)
 	file.close();
 
 	// Activate algorithms and measure their complexity
-	measureComplexity(vertices, source, dest, adjList, adjMatrix, argv[2]);
+	MeasureTime::measureComplexity(vertices, source, dest, adjList, adjMatrix, argv[2]);
 }

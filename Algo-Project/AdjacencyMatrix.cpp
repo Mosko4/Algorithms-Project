@@ -72,24 +72,3 @@ Item* AdjacencyMatrix::BuildItemArray()
 
 	return res;
 }
-
-void AdjacencyMatrix::printMatrix()
-{
-	for (int i = 0; i < m_vertices; i++)
-	{
-		std::cout << '\t' << i + 1;
-	}
-	std::cout << '\n' << '\n';
-	for (int i = 0; i < m_vertices; i++)
-	{
-		std::cout << i + 1 << '\t';
-		for (int j = 0; j < m_vertices; j++)
-		{
-			if (m_adjMatrix[i][j] == INF)
-				std::cout << '\\' << '\t';
-			else
-				std::cout << m_adjMatrix[i][j] << '\t';
-		}
-		std::cout << '\n';
-	}
-}

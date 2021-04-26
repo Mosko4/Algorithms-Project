@@ -30,7 +30,4 @@ public:
 	bool findNode(const int vertex) const;
 	int getNumEdges() const { return vertices; }
 	Node* getListHead() const { return _head; }
-
-	// debugging
-	void printList();
 };

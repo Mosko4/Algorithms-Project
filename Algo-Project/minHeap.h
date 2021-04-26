@@ -30,7 +30,5 @@
 		void makeEmpty();
 		void DecreaseKey(int place, float newKey);
 		void Build(int vertex); // initialize heap for dijkstra - only source vertex key = 0
-
-		
 	};
 

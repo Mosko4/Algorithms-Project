@@ -31,7 +31,5 @@ public:
 	int getNumVertices() const { return m_vertices; }
 	float getWeight(int u, int v)const;
 	Item* BuildItemArray();
-	// debugging
-	void printMatrix();
 };
 

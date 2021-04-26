@@ -1,6 +1,7 @@
 #pragma once
 #include "Item.h"
 #include <iostream>
+#include <limits>
 
 class minArray
 {

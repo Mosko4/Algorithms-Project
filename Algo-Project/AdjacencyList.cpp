@@ -33,14 +33,3 @@ void AdjacencyList::RemoveEdge(int u, int v)
 {
 	m_adjList[u - 1].DeleteNode(v);
 }
-
-void AdjacencyList::printList()
-{
-	for (int i = 0; i < m_vertices; i++)
-	{
-		std::cout << i + 1 << " |\t";
-		m_adjList[i].printList();
-		std::cout << "\n\n";
-	}
-	std::cout << "------------------------" << std::endl;
-}

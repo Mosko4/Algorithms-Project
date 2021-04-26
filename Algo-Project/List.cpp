@@ -1,15 +1,14 @@
 #include "List.h"
 
-
 List::List()
 {
 	MakeEmptyList();
 }
+
 List::~List()
 {
 	clearList();
 }
-
 
 void List::MakeEmptyList()
 {
@@ -29,7 +28,6 @@ void List::clearList()
 		temp = _head;
 	}
 }
-
 
 void List::addToList(const int vertex, const float weight)
 {
@@ -96,15 +94,4 @@ bool List::findNode(const int vertex) const
 	}
 
 	return found;
-}
-
-void List::printList()
-{
-	Node* temp = _head;
-
-	while (temp)
-	{
-		std::cout << temp->vertex << '(' << temp->weight << ')' << " -> ";
-		temp = temp->_next;
-	}
 }

@@ -1,6 +1,5 @@
 #include "minHeap.h"
 
-
 minHeap::minHeap(int maxSize) : allocated(1), m_heapSize(0), m_maxSize(maxSize), m_arr(new Item[maxSize]), itemIndex(new int[maxSize])
 {
 }
@@ -129,7 +128,7 @@ void minHeap::Build(int vertex)
 	
 	for (int i = 0; i < m_maxSize; i++)
 	{
-		Item currentItem(i + 1, FLT_MAX);
+		Item currentItem(i + 1, MAX);
 		if (i + 1 == vertex) // source vertex
 			currentItem.key = 0;
 

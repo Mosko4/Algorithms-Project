@@ -1,4 +1,6 @@
 #pragma once
+#include <limits>
+constexpr float MAX = std::numeric_limits<float>::max();
 
 struct Item {
 	int data; //vertex

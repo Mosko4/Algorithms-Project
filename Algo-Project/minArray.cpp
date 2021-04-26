@@ -88,7 +88,7 @@ void minArray::build(int vertex)
 {
 	for (int i = 0; i < m_maxSize; i++)
 	{
-		Item item(i + 1, FLT_MAX);
+		Item item(i + 1, MAX);
 		if (i + 1 == vertex)
 			item.key = 0;
 

@@ -24,8 +24,5 @@ public:
 	void RemoveEdge(int u, int v);
 	int getNumVertices() const { return m_vertices; }
 	List::Node* getListHead(int i) const { return m_adjList[i].getListHead();}
-
-	// debugging
-	void printList();
 };
 

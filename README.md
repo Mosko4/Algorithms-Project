@@ -1,11 +1,15 @@
-**Project in the Algorithm course - MTA 2021**
+#Project in the Algorithm course - MTA 2021
 =====================================================================
-***Made by Omer Moskowitz & Yarden Naim***
+>This project is about implementing 2 algorithms of determining the shortest path from some source vertex to other vertices in a directed weighted graph. 
+> - Bellman Ford
+> - Dijkstra (with 2 different implementations of a priority queue)
+
+Made by:
+- Yarden Naim - <https://github.com/yardenaim1>
+- Omer Moskowitz - <https://github.com/Mosko4>
 
 
-This project is about implementing 2 algorithms of determining the shortest path from some source vertex to other vertices in a directed weighted graph. 
-- Bellman Ford
-- Dijkstra (with 2 different implementations of a priority queue)
+
 
 There are 2 representations of a graph in this project:
 - A graph represented by an adjacency list

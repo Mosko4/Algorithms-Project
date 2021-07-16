@@ -1,4 +1,4 @@
-#Project in the Algorithm course - MTA 2021
+Project in the Algorithm course - MTA 2021
 =====================================================================
 >This project is about implementing 2 algorithms of determining the shortest path from some source vertex to other vertices in a directed weighted graph. 
 > - Bellman Ford
